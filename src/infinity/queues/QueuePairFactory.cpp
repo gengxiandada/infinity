@@ -20,6 +20,7 @@
 namespace infinity {
 namespace queues {
 
+//在建立通信的过程中，暂存两个节点会用于通信的QP在内的信息
 typedef struct {
 
 	uint16_t localDeviceId;
@@ -71,13 +72,13 @@ void QueuePairFactory::bindToPort(uint16_t port) {
 
 }
 
-QueuePair * QueuePairFactory::acceptIncomingConnection(void *userData, uint32_t userDataSizeInBytes) {
+QueuePair *QueuePairFactory::acceptIncomingConnection(void *userData, uint32_t userDataSizeInBytes) {
 
 	INFINITY_ASSERT(userDataSizeInBytes < infinity::core::Configuration::MAX_CONNECTION_USER_DATA_SIZE,
 			"[INFINITY][QUEUES][FACTORY] User data size is too large.\n")
 
-	serializedQueuePair *receiveBuffer = (serializedQueuePair*) calloc(1, sizeof(serializedQueuePair));
-	serializedQueuePair *sendBuffer = (serializedQueuePair*) calloc(1, sizeof(serializedQueuePair));
+	serializedQueuePair *receiveBuffer = (serializedQueuePair *) calloc(1, sizeof(serializedQueuePair));
+	serializedQueuePair *sendBuffer = (serializedQueuePair *) calloc(1, sizeof(serializedQueuePair));
 
 	int connectionSocket = accept(this->serverSocket, (sockaddr *) NULL, NULL);
 	INFINITY_ASSERT(connectionSocket >= 0, "[INFINITY][QUEUES][FACTORY] Cannot open connection socket.\n");
@@ -115,7 +116,7 @@ QueuePair * QueuePairFactory::acceptIncomingConnection(void *userData, uint32_t 
 
 }
 
-QueuePair * QueuePairFactory::connectToRemoteHost(const char* hostAddress, uint16_t port, void *userData, uint32_t userDataSizeInBytes) {
+QueuePair *QueuePairFactory::connectToRemoteHost(const char *hostAddress, uint16_t port, void *userData, uint32_t userDataSizeInBytes) {
 
 	INFINITY_ASSERT(userDataSizeInBytes < infinity::core::Configuration::MAX_CONNECTION_USER_DATA_SIZE,
 			"[INFINITY][QUEUES][FACTORY] User data size is too large.\n")
@@ -168,7 +169,7 @@ QueuePair * QueuePairFactory::connectToRemoteHost(const char* hostAddress, uint1
 
 }
 
-QueuePair* QueuePairFactory::createLoopback(void *userData, uint32_t userDataSizeInBytes) {
+QueuePair *QueuePairFactory::createLoopback(void *userData, uint32_t userDataSizeInBytes) {
 
 	QueuePair *queuePair = new QueuePair(this->context);
 	queuePair->activate(queuePair->getLocalDeviceId(), queuePair->getQueuePairNumber(), queuePair->getSequenceNumber());

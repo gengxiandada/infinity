@@ -33,7 +33,7 @@ RegisteredMemory::RegisteredMemory(infinity::core::Context *context, uint64_t si
 	INFINITY_ASSERT(this->ibvMemoryRegion != NULL, "[INFINITY][MEMORY][REGISTERED] Registration failed.\n");
 }
 
-RegisteredMemory::RegisteredMemory(infinity::core::Context* context, void *data, uint64_t sizeInBytes) {
+RegisteredMemory::RegisteredMemory(infinity::core::Context *context, void *data, uint64_t sizeInBytes) {
 
 	this->context = context;
 	this->sizeInBytes = sizeInBytes;
@@ -57,7 +57,7 @@ RegisteredMemory::~RegisteredMemory() {
 
 }
 
-void* RegisteredMemory::getData() {
+void *RegisteredMemory::getData() {
 
 	return this->data;
 
@@ -69,7 +69,7 @@ uint64_t RegisteredMemory::getSizeInBytes() {
 
 }
 
-ibv_mr* RegisteredMemory::getRegion() {
+ibv_mr *RegisteredMemory::getRegion() {
 
 	return this->ibvMemoryRegion;
 

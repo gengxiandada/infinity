@@ -156,7 +156,7 @@ protected:
 protected:
 
 	void registerQueuePair(infinity::queues::QueuePair *queuePair);
-	std::unordered_map<uint32_t, infinity::queues::QueuePair *> queuePairMap;
+	std::unordered_map<uint32_t, infinity::queues::QueuePair *> queuePairMap;//QPN到QP的映射
 
 };
 
