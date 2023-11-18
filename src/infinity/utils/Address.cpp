@@ -20,7 +20,7 @@
 namespace infinity {
 namespace utils {
 
-char* Address::getIpAddressOfInterface(const char* interfaceName) {
+char* Address::getIpAddressOfInterface(const char *interfaceName) {
 
 	struct ifaddrs *ifAddr;
 	struct ifaddrs *ifa;
@@ -46,7 +46,7 @@ char* Address::getIpAddressOfInterface(const char* interfaceName) {
 
 }
 
-uint32_t Address::getIpAddressAsUint32(const char* ipAddress) {
+uint32_t Address::getIpAddressAsUint32(const char *ipAddress) {
 
 	uint32_t ipAddressNumbers[4];
 	sscanf(ipAddress, "%d.%d.%d.%d", &ipAddressNumbers[3], &ipAddressNumbers[2], &ipAddressNumbers[1], &ipAddressNumbers[0]);

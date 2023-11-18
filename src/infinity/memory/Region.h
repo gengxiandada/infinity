@@ -26,9 +26,9 @@ public:
 
 	virtual ~Region();
 
-	RegionToken * createRegionToken();
-	RegionToken * createRegionToken(uint64_t offset);
-	RegionToken * createRegionToken(uint64_t offset, uint64_t size);
+	RegionToken *createRegionToken();
+	RegionToken *createRegionToken(uint64_t offset);
+	RegionToken *createRegionToken(uint64_t offset, uint64_t size);
 
 public:
 
@@ -42,13 +42,13 @@ public:
 
 protected:
 
-	infinity::core::Context* context;
+	infinity::core::Context *context;
 	RegionType memoryRegionType;
 	ibv_mr *ibvMemoryRegion;
 
 protected:
 
-	void * data;
+	void *data;
 	uint64_t sizeInBytes;
 
 };

@@ -158,7 +158,7 @@ void QueuePair::send(infinity::memory::Buffer* buffer, uint64_t localOffset, uin
 		requestToken->setRegion(buffer);
 	}
 
-	struct ibv_sge sgElement;
+	struct ibv_sge sgElement;////
 	struct ibv_send_wr workRequest;
 	struct ibv_send_wr *badWorkRequest;
 
