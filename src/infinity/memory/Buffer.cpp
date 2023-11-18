@@ -19,12 +19,13 @@
 namespace infinity {
 namespace memory {
 
-Buffer::Buffer(infinity::core::Context* context, uint64_t sizeInBytes) {
+Buffer::Buffer(infinity::core::Context *context, uint64_t sizeInBytes) {
 
 	this->context = context;
 	this->sizeInBytes = sizeInBytes;
 	this->memoryRegionType = RegionType::BUFFER;
 
+    //申请sizeInBytes大小的内存，以PAGE_SIZE大小边界对齐，地址保存在this->data中
 	int res = posix_memalign(&(this->data), infinity::core::Configuration::PAGE_SIZE, sizeInBytes);
 	INFINITY_ASSERT(res == 0, "[INFINITY][MEMORY][BUFFER] Cannot allocate and align buffer.\n");
 
@@ -39,7 +40,7 @@ Buffer::Buffer(infinity::core::Context* context, uint64_t sizeInBytes) {
 
 }
 
-Buffer::Buffer(infinity::core::Context* context, infinity::memory::RegisteredMemory* memory, uint64_t offset, uint64_t sizeInBytes) {
+Buffer::Buffer(infinity::core::Context* context, infinity::memory::RegisteredMemory *memory, uint64_t offset, uint64_t sizeInBytes) {
 
 	this->context = context;
 	this->sizeInBytes = sizeInBytes;
@@ -80,11 +81,11 @@ Buffer::~Buffer() {
 
 }
 
-void* Buffer::getData() {
+void *Buffer::getData() {
 	return reinterpret_cast<void *>(this->getAddress());
 }
 
-void Buffer::resize(uint64_t newSize, void* newData) {
+void Buffer::resize(uint64_t newSize, void *newData) {
 
 	void *oldData = this->data;
 	uint32_t oldSize = this->sizeInBytes;

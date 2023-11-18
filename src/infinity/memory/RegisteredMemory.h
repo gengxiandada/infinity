@@ -22,16 +22,16 @@ public:
 	 RegisteredMemory(infinity::core::Context *context, void *data, uint64_t sizeInBytes);
 	 ~RegisteredMemory();
 
-	 void * getData();
+	 void *getData();
 
 	 uint64_t getSizeInBytes();
 
-	 ibv_mr * getRegion();
+	 ibv_mr *getRegion();
 
 
 protected:
 
-	 infinity::core::Context* context;
+	 infinity::core::Context *context;
 
 	 void *data;
 	 uint64_t sizeInBytes;

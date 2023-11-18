@@ -32,21 +32,21 @@ public:
 	/**
 	 * Accept incoming connection request (passive side)
 	 */
-	QueuePair * acceptIncomingConnection(void *userData = NULL, uint32_t userDataSizeInBytes = 0);
+	QueuePair *acceptIncomingConnection(void *userData = NULL, uint32_t userDataSizeInBytes = 0);
 
 	/**
 	 * Connect to remote machine (active side)
 	 */
-	QueuePair * connectToRemoteHost(const char* hostAddress, uint16_t port, void *userData = NULL, uint32_t userDataSizeInBytes = 0);
+	QueuePair *connectToRemoteHost(const char *hostAddress, uint16_t port, void *userData = NULL, uint32_t userDataSizeInBytes = 0);
 
 	/**
 	 * Create loopback queue pair
 	 */
-	QueuePair * createLoopback(void *userData = NULL, uint32_t userDataSizeInBytes = 0);
+	QueuePair *createLoopback(void *userData = NULL, uint32_t userDataSizeInBytes = 0);
 
 protected:
 
-	infinity::core::Context * context;
+	infinity::core::Context *context;
 
 	int32_t serverSocket;
 

@@ -17,7 +17,7 @@
 namespace infinity {
 namespace memory {
 
-RegisteredMemory::RegisteredMemory(infinity::core::Context* context, uint64_t sizeInBytes) {
+RegisteredMemory::RegisteredMemory(infinity::core::Context *context, uint64_t sizeInBytes) {
 
 	this->context = context;
 	this->sizeInBytes = sizeInBytes;

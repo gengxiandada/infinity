@@ -84,15 +84,15 @@ public:
 
 public:
 
-	infinity::requests::RequestToken * defaultRequestToken;
-	infinity::memory::Atomic * defaultAtomic;
+	infinity::requests::RequestToken *defaultRequestToken;
+	infinity::memory::Atomic *defaultAtomic;
 
 protected:
 
 	/**
 	 * Returns ibVerbs context
 	 */
-	ibv_context * getInfiniBandContext();
+	ibv_context *getInfiniBandContext();
 
 	/**
 	 * Returns local device id
@@ -107,7 +107,7 @@ protected:
 	/**
 	 * Returns ibVerbs protection domain
 	 */
-	ibv_pd * getProtectionDomain();
+	ibv_pd *getProtectionDomain();
 
 protected:
 
@@ -119,17 +119,17 @@ protected:
 	/**
 	 * Returns ibVerbs completion queue for sending
 	 */
-	ibv_cq * getSendCompletionQueue();
+	ibv_cq *getSendCompletionQueue();
 
 	/**
 	 * Returns ibVerbs completion queue for receiving
 	 */
-	ibv_cq * getReceiveCompletionQueue();
+	ibv_cq *getReceiveCompletionQueue();
 
 	/**
 	 * Returns ibVerbs shared receive queue
 	 */
-	ibv_srq * getSharedReceiveQueue();
+	ibv_srq *getSharedReceiveQueue();
 
 protected:
 

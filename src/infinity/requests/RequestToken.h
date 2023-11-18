@@ -26,8 +26,8 @@ public:
 
 	void reset();
 
-	void setRegion(infinity::memory::Region * region);
-	infinity::memory::Region * getRegion();
+	void setRegion(infinity::memory::Region *region);
+	infinity::memory::Region *getRegion();
 
 	void setCompleted(bool success);
 	bool wasSuccessful();
@@ -41,13 +41,13 @@ public:
 
 	void setUserData(void* userData, uint32_t userDataSize);
 	bool hasUserData();
-	void* getUserData();
+	void *getUserData();
 	uint32_t getUserDataSize();
 
 protected:
 
-	infinity::core::Context * const context;
-	infinity::memory::Region * region;
+	infinity::core::Context *const context;
+	infinity::memory::Region *region;
 
 	std::atomic<bool> completed;
 	std::atomic<bool> success;

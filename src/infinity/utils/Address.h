@@ -18,7 +18,9 @@ class Address {
 
 public:
 
-	static char * getIpAddressOfInterface(const char *interfaceName);
+    //以字符串方式获取ip地址
+	static char *getIpAddressOfInterface(const char *interfaceName);
+    //以32位无符号整数方式获取ip地址
 	static uint32_t getIpAddressAsUint32(const char *ipAddress);
 
 };

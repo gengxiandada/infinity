@@ -42,7 +42,7 @@ int main(int argc, char **argv) {
 	}
 
 	infinity::core::Context *context = new infinity::core::Context();
-	infinity::queues::QueuePairFactory *qpFactory = new  infinity::queues::QueuePairFactory(context);
+	infinity::queues::QueuePairFactory *qpFactory = new infinity::queues::QueuePairFactory(context);
 	infinity::queues::QueuePair *qp;
 
 	if(isServer) {

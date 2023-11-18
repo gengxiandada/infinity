@@ -99,13 +99,13 @@ Context::~Context() {
 
 }
 
-void Context::postReceiveBuffer(infinity::memory::Buffer* buffer) {
+void Context::postReceiveBuffer(infinity::memory::Buffer *buffer) {
 
 	INFINITY_ASSERT(buffer->getSizeInBytes() <= std::numeric_limits<uint32_t>::max(),
 			"[INFINITY][CORE][CONTEXT] Cannot post receive buffer which is larger than max(uint32_t).\n");
 
 	// Create scatter-getter
-	ibv_sge isge;
+	ibv_sge isge;////
 	memset(&isge, 0, sizeof(ibv_sge));
 	isge.addr = buffer->getAddress();
 	isge.length = static_cast<uint32_t>(buffer->getSizeInBytes());
@@ -132,18 +132,18 @@ bool Context::receive(receive_element_t* receiveElement) {
 
 }
 
-bool Context::receive(infinity::memory::Buffer** buffer, uint32_t *bytesWritten, uint32_t *immediateValue, bool *immediateValueValid, infinity::queues::QueuePair **queuePair) {
+bool Context::receive(infinity::memory::Buffer **buffer, uint32_t *bytesWritten, uint32_t *immediateValue, bool *immediateValueValid, infinity::queues::QueuePair **queuePair) {
 
 	ibv_wc wc;
 	if (ibv_poll_cq(this->ibvReceiveCompletionQueue, 1, &wc) > 0) {
 
 		if(wc.opcode == IBV_WC_RECV) {
-			*(buffer) = reinterpret_cast<infinity::memory::Buffer*>(wc.wr_id);
+			*(buffer) = reinterpret_cast<infinity::memory::Buffer *>(wc.wr_id);
 			*(bytesWritten) = wc.byte_len;
 		} else if (wc.opcode == IBV_WC_RECV_RDMA_WITH_IMM) {
 			*(buffer) = NULL;
 			*(bytesWritten) = wc.byte_len;
-			infinity::memory::Buffer* receiveBuffer = reinterpret_cast<infinity::memory::Buffer*>(wc.wr_id);
+			infinity::memory::Buffer *receiveBuffer = reinterpret_cast<infinity::memory::Buffer *>(wc.wr_id);
 			this->postReceiveBuffer(receiveBuffer);
 		}
 
@@ -171,7 +171,7 @@ bool Context::pollSendCompletionQueue() {
 	ibv_wc wc;
 	if (ibv_poll_cq(this->ibvSendCompletionQueue, 1, &wc) > 0) {
 
-		infinity::requests::RequestToken * request = reinterpret_cast<infinity::requests::RequestToken*>(wc.wr_id);
+		infinity::requests::RequestToken *request = reinterpret_cast<infinity::requests::RequestToken *>(wc.wr_id);
 		if (request != NULL) {
 			request->setCompleted(wc.status == IBV_WC_SUCCESS);
 		}
@@ -188,11 +188,11 @@ bool Context::pollSendCompletionQueue() {
 
 }
 
-void Context::registerQueuePair(infinity::queues::QueuePair* queuePair) {
+void Context::registerQueuePair(infinity::queues::QueuePair *queuePair) {
 	this->queuePairMap.insert({queuePair->getQueuePairNumber(), queuePair});
 }
 
-ibv_context* Context::getInfiniBandContext() {
+ibv_context *Context::getInfiniBandContext() {
 	return this->ibvContext;
 }
 
@@ -204,19 +204,19 @@ uint16_t Context::getDevicePort() {
 	return this->ibvDevicePort;
 }
 
-ibv_pd* Context::getProtectionDomain() {
+ibv_pd *Context::getProtectionDomain() {
 	return this->ibvProtectionDomain;
 }
 
-ibv_cq* Context::getSendCompletionQueue() {
+ibv_cq *Context::getSendCompletionQueue() {
 	return this->ibvSendCompletionQueue;
 }
 
-ibv_cq* Context::getReceiveCompletionQueue() {
+ibv_cq *Context::getReceiveCompletionQueue() {
 	return this->ibvReceiveCompletionQueue;
 }
 
-ibv_srq* Context::getSharedReceiveQueue() {
+ibv_srq *Context::getSharedReceiveQueue() {
 	return this->ibvSharedReceiveQueue;
 }
 
