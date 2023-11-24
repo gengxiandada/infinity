@@ -18,6 +18,9 @@
 namespace infinity {
 namespace requests {
 
+/**
+ * Work Request
+ */
 class RequestToken {
 
 public:
@@ -47,7 +50,7 @@ public:
 protected:
 
 	infinity::core::Context *const context;
-	infinity::memory::Region *region;
+	infinity::memory::Region *region;//请求所对应的buffer
 
 	std::atomic<bool> completed;
 	std::atomic<bool> success;

@@ -73,7 +73,6 @@ int main(int argc, char **argv) {
 		qp = qpFactory->connectToRemoteHost(SERVER_IP, PORT_NUMBER);
 		infinity::memory::RegionToken *remoteBufferToken = (infinity::memory::RegionToken *) qp->getUserData();
 
-
 		printf("Creating buffers\n");
 		infinity::memory::Buffer *buffer1Sided = new infinity::memory::Buffer(context, 128 * sizeof(char));
 		infinity::memory::Buffer *buffer2Sided = new infinity::memory::Buffer(context, 128 * sizeof(char));

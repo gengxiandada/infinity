@@ -26,8 +26,11 @@ public:
 
 	virtual ~Region();
 
+    //为当前MR的整片内存区域创建Token
 	RegionToken *createRegionToken();
+    //为以当前MR地址偏移为offset，大小为sizeInBytes-offset的内存区域创建Token
 	RegionToken *createRegionToken(uint64_t offset);
+    //为以当前MR地址偏移为offset，大小为size的内存区域创建Token
 	RegionToken *createRegionToken(uint64_t offset, uint64_t size);
 
 public:

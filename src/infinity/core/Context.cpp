@@ -126,7 +126,7 @@ void Context::postReceiveBuffer(infinity::memory::Buffer *buffer) {
 
 }
 
-bool Context::receive(receive_element_t* receiveElement) {
+bool Context::receive(receive_element_t *receiveElement) {
 
 	return receive(&(receiveElement->buffer), &(receiveElement->bytesWritten), &(receiveElement->immediateValue), &(receiveElement->immediateValueValid), &(receiveElement->queuePair));
 

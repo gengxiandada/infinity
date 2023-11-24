@@ -18,17 +18,14 @@ Region::~Region() {
 	// To be overwritten in sub class
 }
 
-//为MR创建Token
 RegionToken *Region::createRegionToken() {
 	return new RegionToken(this, getMemoryRegionType(), getSizeInBytes(), getAddress(), getLocalKey(), getRemoteKey());
 }
 
-//为地址偏移为offset，大小为sizeInBytes-offset的MR创建Token
 RegionToken *Region::createRegionToken(uint64_t offset) {
 	return new RegionToken(this, getMemoryRegionType(), getRemainingSizeInBytes(offset), getAddressWithOffset(offset), getLocalKey(), getRemoteKey());
 }
 
-//为地址偏移为offset，大小为size的MR创建Token
 RegionToken *Region::createRegionToken(uint64_t offset, uint64_t size) {
 	return new RegionToken(this, getMemoryRegionType(), size, getAddressWithOffset(offset), getLocalKey(), getRemoteKey());
 }

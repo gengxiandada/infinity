@@ -142,15 +142,15 @@ uint32_t QueuePair::getSequenceNumber() {
 	return this->sequenceNumber;
 }
 
-void QueuePair::send(infinity::memory::Buffer* buffer, infinity::requests::RequestToken *requestToken) {
+void QueuePair::send(infinity::memory::Buffer *buffer, infinity::requests::RequestToken *requestToken) {
 	send(buffer, 0, buffer->getSizeInBytes(), OperationFlags(), requestToken);
 }
 
-void QueuePair::send(infinity::memory::Buffer* buffer, uint32_t sizeInBytes, infinity::requests::RequestToken *requestToken) {
+void QueuePair::send(infinity::memory::Buffer *buffer, uint32_t sizeInBytes, infinity::requests::RequestToken *requestToken) {
 	send(buffer, 0, sizeInBytes, OperationFlags(), requestToken);
 }
 
-void QueuePair::send(infinity::memory::Buffer* buffer, uint64_t localOffset, uint32_t sizeInBytes, OperationFlags send_flags,
+void QueuePair::send(infinity::memory::Buffer *buffer, uint64_t localOffset, uint32_t sizeInBytes, OperationFlags send_flags,
     infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
@@ -188,7 +188,7 @@ void QueuePair::send(infinity::memory::Buffer* buffer, uint64_t localOffset, uin
 
 }
 
-void QueuePair::sendWithImmediate(infinity::memory::Buffer* buffer, uint64_t localOffset, uint32_t sizeInBytes, uint32_t immediateValue,
+void QueuePair::sendWithImmediate(infinity::memory::Buffer *buffer, uint64_t localOffset, uint32_t sizeInBytes, uint32_t immediateValue,
     OperationFlags send_flags, infinity::requests::RequestToken* requestToken) {
 
 	if (requestToken != NULL) {
@@ -228,17 +228,17 @@ void QueuePair::sendWithImmediate(infinity::memory::Buffer* buffer, uint64_t loc
 
 }
 
-void QueuePair::write(infinity::memory::Buffer* buffer, infinity::memory::RegionToken* destination, infinity::requests::RequestToken *requestToken) {
+void QueuePair::write(infinity::memory::Buffer *buffer, infinity::memory::RegionToken *destination, infinity::requests::RequestToken *requestToken) {
 	write(buffer, 0, destination, 0, buffer->getSizeInBytes(), OperationFlags(), requestToken);
 	INFINITY_ASSERT(buffer->getSizeInBytes() <= ((uint64_t) UINT32_MAX), "[INFINITY][QUEUES][QUEUEPAIR] Request must be smaller or equal to UINT_32_MAX bytes. This memory region is larger. Please explicitly indicate the size of the data to transfer.\n");
 }
 
-void QueuePair::write(infinity::memory::Buffer* buffer, infinity::memory::RegionToken* destination, uint32_t sizeInBytes,
+void QueuePair::write(infinity::memory::Buffer *buffer, infinity::memory::RegionToken *destination, uint32_t sizeInBytes,
 		infinity::requests::RequestToken *requestToken) {
 	write(buffer, 0, destination, 0, sizeInBytes, OperationFlags(), requestToken);
 }
 
-void QueuePair::write(infinity::memory::Buffer* buffer, uint64_t localOffset, infinity::memory::RegionToken* destination, uint64_t remoteOffset,
+void QueuePair::write(infinity::memory::Buffer *buffer, uint64_t localOffset, infinity::memory::RegionToken* destination, uint64_t remoteOffset,
 		uint32_t sizeInBytes, OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
@@ -281,8 +281,8 @@ void QueuePair::write(infinity::memory::Buffer* buffer, uint64_t localOffset, in
 
 }
 
-void QueuePair::writeWithImmediate(infinity::memory::Buffer* buffer, uint64_t localOffset, infinity::memory::RegionToken* destination, uint64_t remoteOffset,
-		uint32_t sizeInBytes, uint32_t immediateValue, OperationFlags send_flags, infinity::requests::RequestToken* requestToken) {
+void QueuePair::writeWithImmediate(infinity::memory::Buffer *buffer, uint64_t localOffset, infinity::memory::RegionToken *destination, uint64_t remoteOffset,
+		uint32_t sizeInBytes, uint32_t immediateValue, OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
 		requestToken->reset();
@@ -326,8 +326,8 @@ void QueuePair::writeWithImmediate(infinity::memory::Buffer* buffer, uint64_t lo
 
 }
 
-void QueuePair::multiWrite(infinity::memory::Buffer** buffers, uint32_t* sizesInBytes, uint64_t* localOffsets, uint32_t numberOfElements,
-		infinity::memory::RegionToken* destination, uint64_t remoteOffset, OperationFlags send_flags, infinity::requests::RequestToken* requestToken) {
+void QueuePair::multiWrite(infinity::memory::Buffer **buffers, uint32_t *sizesInBytes, uint64_t *localOffsets, uint32_t numberOfElements,
+		infinity::memory::RegionToken *destination, uint64_t remoteOffset, OperationFlags send_flags, infinity::requests::RequestToken* requestToken) {
 
 	if (requestToken != NULL) {
 		requestToken->reset();
@@ -378,8 +378,8 @@ void QueuePair::multiWrite(infinity::memory::Buffer** buffers, uint32_t* sizesIn
 	INFINITY_DEBUG("[INFINITY][QUEUES][QUEUEPAIR] Multi-Write request created (id %lu).\n", workRequest.wr_id);
 }
 
-void QueuePair::multiWriteWithImmediate(infinity::memory::Buffer** buffers, uint32_t* sizesInBytes, uint64_t* localOffsets, uint32_t numberOfElements,
-		infinity::memory::RegionToken* destination, uint64_t remoteOffset, uint32_t immediateValue, OperationFlags send_flags, infinity::requests::RequestToken* requestToken) {
+void QueuePair::multiWriteWithImmediate(infinity::memory::Buffer **buffers, uint32_t *sizesInBytes, uint64_t *localOffsets, uint32_t numberOfElements,
+		infinity::memory::RegionToken *destination, uint64_t remoteOffset, uint32_t immediateValue, OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
 		requestToken->reset();
@@ -433,17 +433,17 @@ void QueuePair::multiWriteWithImmediate(infinity::memory::Buffer** buffers, uint
 
 }
 
-void QueuePair::read(infinity::memory::Buffer* buffer, infinity::memory::RegionToken* source, infinity::requests::RequestToken *requestToken) {
+void QueuePair::read(infinity::memory::Buffer *buffer, infinity::memory::RegionToken *source, infinity::requests::RequestToken *requestToken) {
 	read(buffer, 0, source, 0, buffer->getSizeInBytes(), OperationFlags(), requestToken);
 	INFINITY_ASSERT(buffer->getSizeInBytes() <= ((uint64_t) UINT32_MAX), "[INFINITY][QUEUES][QUEUEPAIR] Request must be smaller or equal to UINT_32_MAX bytes. This memory region is larger. Please explicitly indicate the size of the data to transfer.\n");
 }
 
-void QueuePair::read(infinity::memory::Buffer* buffer, infinity::memory::RegionToken* source, uint32_t sizeInBytes,
+void QueuePair::read(infinity::memory::Buffer *buffer, infinity::memory::RegionToken *source, uint32_t sizeInBytes,
 		infinity::requests::RequestToken *requestToken) {
 	read(buffer, 0, source, 0, sizeInBytes, OperationFlags(), requestToken);
 }
 
-void QueuePair::read(infinity::memory::Buffer* buffer, uint64_t localOffset, infinity::memory::RegionToken* source, uint64_t remoteOffset, uint32_t sizeInBytes,
+void QueuePair::read(infinity::memory::Buffer *buffer, uint64_t localOffset, infinity::memory::RegionToken *source, uint64_t remoteOffset, uint32_t sizeInBytes,
 		OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
@@ -451,7 +451,7 @@ void QueuePair::read(infinity::memory::Buffer* buffer, uint64_t localOffset, inf
 		requestToken->setRegion(buffer);
 	}
 
-	struct ibv_sge sgElement;
+	struct ibv_sge sgElement;////
 	struct ibv_send_wr workRequest;
 	struct ibv_send_wr *badWorkRequest;
 
@@ -486,7 +486,7 @@ void QueuePair::read(infinity::memory::Buffer* buffer, uint64_t localOffset, inf
 
 }
 
-void QueuePair::compareAndSwap(infinity::memory::RegionToken* destination, infinity::memory::Atomic* previousValue, uint64_t compare, uint64_t swap,
+void QueuePair::compareAndSwap(infinity::memory::RegionToken *destination, infinity::memory::Atomic *previousValue, uint64_t compare, uint64_t swap,
 		OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {
@@ -525,15 +525,15 @@ void QueuePair::compareAndSwap(infinity::memory::RegionToken* destination, infin
 
 }
 
-void QueuePair::compareAndSwap(infinity::memory::RegionToken* destination, uint64_t compare, uint64_t swap, infinity::requests::RequestToken *requestToken) {
+void QueuePair::compareAndSwap(infinity::memory::RegionToken *destination, uint64_t compare, uint64_t swap, infinity::requests::RequestToken *requestToken) {
 	compareAndSwap(destination, context->defaultAtomic, compare, swap, OperationFlags(), requestToken);
 }
 
-void QueuePair::fetchAndAdd(infinity::memory::RegionToken* destination, uint64_t add, infinity::requests::RequestToken *requestToken) {
+void QueuePair::fetchAndAdd(infinity::memory::RegionToken *destination, uint64_t add, infinity::requests::RequestToken *requestToken) {
 	fetchAndAdd(destination, context->defaultAtomic, add, OperationFlags(), requestToken);
 }
 
-void QueuePair::fetchAndAdd(infinity::memory::RegionToken* destination, infinity::memory::Atomic* previousValue, uint64_t add,
+void QueuePair::fetchAndAdd(infinity::memory::RegionToken *destination, infinity::memory::Atomic *previousValue, uint64_t add,
 		OperationFlags send_flags, infinity::requests::RequestToken *requestToken) {
 
 	if (requestToken != NULL) {

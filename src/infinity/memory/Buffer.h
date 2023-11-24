@@ -27,7 +27,7 @@ public:
 
 public:
 
-	void * getData();
+	void *getData();
 	void resize(uint64_t newSize, void *newData = NULL);
 
 protected:

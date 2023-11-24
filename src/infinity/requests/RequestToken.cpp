@@ -58,15 +58,15 @@ void RequestToken::reset() {
 	this->immediateValueValid = false;
 }
 
-void RequestToken::setRegion(infinity::memory::Region* region) {
+void RequestToken::setRegion(infinity::memory::Region *region) {
 	this->region = region;
 }
 
-infinity::memory::Region* RequestToken::getRegion() {
+infinity::memory::Region *RequestToken::getRegion() {
 	return this->region;
 }
 
-void RequestToken::setUserData(void* userData, uint32_t userDataSize) {
+void RequestToken::setUserData(void *userData, uint32_t userDataSize) {
 	this->userData = userData;
 	this->userDataSize = userDataSize;
 	this->userDataValid = true;

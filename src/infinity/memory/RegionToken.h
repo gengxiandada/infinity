@@ -16,6 +16,9 @@
 namespace infinity {
 namespace memory {
 
+/**
+ * MR的RegionToken
+ */
 class RegionToken {
 
 public:

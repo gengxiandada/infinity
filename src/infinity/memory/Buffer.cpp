@@ -40,7 +40,7 @@ Buffer::Buffer(infinity::core::Context *context, uint64_t sizeInBytes) {
 
 }
 
-Buffer::Buffer(infinity::core::Context* context, infinity::memory::RegisteredMemory *memory, uint64_t offset, uint64_t sizeInBytes) {
+Buffer::Buffer(infinity::core::Context *context, infinity::memory::RegisteredMemory *memory, uint64_t offset, uint64_t sizeInBytes) {
 
 	this->context = context;
 	this->sizeInBytes = sizeInBytes;
