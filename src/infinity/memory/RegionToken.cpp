@@ -35,7 +35,7 @@ RegionToken::RegionToken(Region *memoryRegion, RegionType memoryRegionType, uint
 
 }
 
-Region* RegionToken::getMemoryRegion() {
+Region *RegionToken::getMemoryRegion() {
 	return memoryRegion;
 }
 

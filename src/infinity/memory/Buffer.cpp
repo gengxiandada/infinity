@@ -31,6 +31,7 @@ Buffer::Buffer(infinity::core::Context *context, uint64_t sizeInBytes) {
 
 	memset(this->data, 0, sizeInBytes);
 
+    //将申请到的内存区域进行注册，相关信息保存到ibvMemoryRegion结构体中
 	this->ibvMemoryRegion = ibv_reg_mr(this->context->getProtectionDomain(), this->data, this->sizeInBytes,
 			IBV_ACCESS_REMOTE_WRITE | IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_READ);
 	INFINITY_ASSERT(this->ibvMemoryRegion != NULL, "[INFINITY][MEMORY][BUFFER] Registration failed.\n");

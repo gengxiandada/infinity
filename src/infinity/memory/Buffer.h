@@ -20,8 +20,10 @@ class Buffer : public Region {
 
 public:
 
+    //注册sizeInBytes大小的内存
 	Buffer(infinity::core::Context *context, uint64_t sizeInBytes);
 	Buffer(infinity::core::Context *context, infinity::memory::RegisteredMemory *memory, uint64_t offset, uint64_t sizeInBytes);
+    //在地址memory处注册sizeInBytes大小的内存
 	Buffer(infinity::core::Context *context, void *memory, uint64_t sizeInBytes);
 	~Buffer();
 

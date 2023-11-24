@@ -28,7 +28,7 @@ public:
 
 public:
 
-	Region * getMemoryRegion();
+	Region *getMemoryRegion();
 	RegionType getMemoryRegionType();
 	uint64_t getSizeInBytes();
 	uint64_t getRemainingSizeInBytes(uint64_t offset);

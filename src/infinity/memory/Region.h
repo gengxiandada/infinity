@@ -47,7 +47,7 @@ protected:
 
 	infinity::core::Context *context;
 	RegionType memoryRegionType;
-	ibv_mr *ibvMemoryRegion;
+	ibv_mr *ibvMemoryRegion;//注册内存区域的相关信息（lkey、rkey等）
 
 protected:
 
