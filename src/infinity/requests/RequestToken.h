@@ -42,7 +42,7 @@ public:
 	bool hasImmediateValue();
 	uint32_t getImmediateValue();
 
-	void setUserData(void* userData, uint32_t userDataSize);
+	void setUserData(void *userData, uint32_t userDataSize);
 	bool hasUserData();
 	void *getUserData();
 	uint32_t getUserDataSize();
