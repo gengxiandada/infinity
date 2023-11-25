@@ -20,7 +20,7 @@
 namespace infinity {
 namespace queues {
 
-//在建立通信的过程中，暂存两个节点会用于通信的QP在内的信息
+//暂存包括稍后用于通信的QP在内的信息
 typedef struct {
 
 	uint16_t localDeviceId;

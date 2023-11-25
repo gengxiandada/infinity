@@ -50,7 +50,7 @@ public:
 protected:
 
 	infinity::core::Context *const context;
-	infinity::memory::Region *region;//请求所对应的buffer
+	infinity::memory::Region *region;//工作请求所对应的buffer
 
 	std::atomic<bool> completed;
 	std::atomic<bool> success;

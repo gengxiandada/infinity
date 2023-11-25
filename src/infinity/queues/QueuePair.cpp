@@ -35,7 +35,7 @@ int OperationFlags::ibvFlags() {
   return flags;
 }
 
-QueuePair::QueuePair(infinity::core::Context* context) :
+QueuePair::QueuePair(infinity::core::Context *context) :
 		context(context) {
 
 	ibv_qp_init_attr qpInitAttributes;
@@ -51,21 +51,30 @@ QueuePair::QueuePair(infinity::core::Context* context) :
 	qpInitAttributes.qp_type = IBV_QPT_RC;
 	qpInitAttributes.sq_sig_all = 0;
 
+    //准备创建一个QP
 	this->ibvQueuePair = ibv_create_qp(context->getProtectionDomain(), &(qpInitAttributes));
 	INFINITY_ASSERT(this->ibvQueuePair != NULL, "[INFINITY][QUEUES][QUEUEPAIR] Cannot create queue pair.\n");
 
 	ibv_qp_attr qpAttributes;
 	memset(&qpAttributes, 0, sizeof(qpAttributes));
 
+    /**
+     * 已初始化状态。
+     * 该状态下用户可以通过Post Receive给这个QP下发Receive WR，
+     * 但是接收到的消息并会被被静默丢弃。
+     * 如果用户下发了一个Post Send的WR，则会报错。
+     */
 	qpAttributes.qp_state = IBV_QPS_INIT;
 	qpAttributes.pkey_index = 0;
 	qpAttributes.port_num = context->getDevicePort();
 	qpAttributes.qp_access_flags = IBV_ACCESS_REMOTE_WRITE | IBV_ACCESS_REMOTE_READ | IBV_ACCESS_LOCAL_WRITE | IBV_ACCESS_REMOTE_ATOMIC;
 
+    //更新QP的属性
 	int32_t returnValue = ibv_modify_qp(this->ibvQueuePair, &(qpAttributes), IBV_QP_STATE | IBV_QP_PORT | IBV_QP_ACCESS_FLAGS | IBV_QP_PKEY_INDEX);
 
 	INFINITY_ASSERT(returnValue == 0, "[INFINITY][QUEUES][QUEUEPAIR] Cannot transition to INIT state.\n");
 
+    //随机生成24比特的编号
 	std::random_device randomGenerator;
         std::uniform_int_distribution<int> range(0, 1<<24);
         this->sequenceNumber = range(randomGenerator);
@@ -91,6 +100,12 @@ void QueuePair::activate(uint16_t remoteDeviceId, uint32_t remoteQueuePairNumber
 	ibv_qp_attr qpAttributes;
 	memset(&(qpAttributes), 0, sizeof(qpAttributes));
 
+    /**
+     * 准备接收状态。
+     * 在INIT状态的基础上RQ可以正常工作，
+     * 即对于接收到的消息可以按照其中WQE的指示搬移数据到指定内存位置。
+     * 此状态下SQ仍然不能工作。
+     */
 	qpAttributes.qp_state = IBV_QPS_RTR;
 	qpAttributes.path_mtu = IBV_MTU_4096;
 	qpAttributes.dest_qp_num = remoteQueuePairNumber;
@@ -108,6 +123,13 @@ void QueuePair::activate(uint16_t remoteDeviceId, uint32_t remoteQueuePairNumber
 
 	INFINITY_ASSERT(returnValue == 0, "[INFINITY][QUEUES][QUEUEPAIR] Cannot transition to RTR state.\n");
 
+    /**
+     * 准备发送状态。
+     * 在RTR基础上SQ可以正常工作，
+     * 即用户可以进行Post Send，
+     * 并且硬件也会根据SQ的内容将数据发送出去。
+     * 进入该状态前，QP必须已于对端建立好链接。
+     */
 	qpAttributes.qp_state = IBV_QPS_RTS;
 	qpAttributes.timeout = 14;
 	qpAttributes.retry_cnt = 7;
@@ -122,7 +144,7 @@ void QueuePair::activate(uint16_t remoteDeviceId, uint32_t remoteQueuePairNumber
 
 }
 
-void QueuePair::setRemoteUserData(void* userData, uint32_t userDataSize) {
+void QueuePair::setRemoteUserData(void *userData, uint32_t userDataSize) {
 	if (userDataSize > 0) {
 		this->userData = new char[userDataSize];
 		memcpy(this->userData, userData, userDataSize);

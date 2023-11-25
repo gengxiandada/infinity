@@ -135,6 +135,7 @@ bool Context::receive(receive_element_t *receiveElement) {
 bool Context::receive(infinity::memory::Buffer **buffer, uint32_t *bytesWritten, uint32_t *immediateValue, bool *immediateValueValid, infinity::queues::QueuePair **queuePair) {
 
 	ibv_wc wc;
+
 	if (ibv_poll_cq(this->ibvReceiveCompletionQueue, 1, &wc) > 0) {
 
 		if(wc.opcode == IBV_WC_RECV) {

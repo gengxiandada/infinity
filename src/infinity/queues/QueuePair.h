@@ -74,7 +74,7 @@ public:
 
 	bool hasUserData();
 	uint32_t getUserDataSize();
-	void * getUserData();
+	void *getUserData();
 
 public:
 
@@ -142,9 +142,9 @@ public:
 
 protected:
 
-	infinity::core::Context * const context;
+	infinity::core::Context *const context;
 
-	ibv_qp* ibvQueuePair;
+	ibv_qp *ibvQueuePair;
 	uint32_t sequenceNumber;
 
     //通信对端的RegionToken和sizeof(RegionToken)
